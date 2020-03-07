@@ -7,8 +7,8 @@ import os
 '''
 1 download ear files from svn reveision id
 
-svn log https://svn-brcd.mobiltel.bg/svn/TIBCO -r 10620 -v --xml
-svn export -r 10620  https://svn-brcd.mobiltel.bg/svn/TIBCO/TIBCO/MDF/MDFRules/Deployment/rulesconfig.properties
+svn log SVN_URL -r 10620 -v --xml
+svn export -r 10620  SVN_URL
 
 2 check name for every ear file in svn revision
 3 map to the application on the environment
@@ -22,7 +22,7 @@ earlist = []
 #scan the revision
 def observerSvnID(svnid):
     svnid = svnid
-    svnLog_raw_command = f"svn log https://svn-brcd.mobiltel.bg/svn/TIBCO -r {svnid} -v  --non-interactive --no-auth-cache --username capplan  --password Capplan11 --xml"
+    svnLog_raw_command = f"svn log SVN_URL -r {svnid} -v  --non-interactive --no-auth-cache --username some_user  --password some_pass --xml"
     svnLog_arg = shlex.split(svnLog_raw_command)
     return svnLog_arg
 
@@ -57,7 +57,7 @@ def downloadSvnID(svnid, path):
     svnid = svnid
     path = path
     os.chdir("/home/docker/dtonchev/ad")
-    svnGetCommand = f"svn export -r {svnid}  'https://svn-brcd.mobiltel.bg/svn/TIBCO{path}' --non-interactive --no-auth-cache --username capplan --password Capplan11"
+    svnGetCommand = f"svn export -r {svnid}  'SVN_URL{path}' --non-interactive --no-auth-cache --username some_user --password some_pass"
     print(svnGetCommand)
     svnGet_arg = shlex.split(svnGetCommand)
     print(svnGet_arg)
